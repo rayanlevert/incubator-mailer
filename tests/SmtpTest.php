@@ -194,15 +194,12 @@ class SmtpTest extends TestCase
     {
         $eventsCount = 0;
 
-        $mailer  = new Manager($this->config);
+        $mailer  = new Manager(array_merge($this->config, ['driver' => 'sendmail']));
         $message = $mailer->createMessage()
             ->to('example_to@gmail.com')
             ->to('example_to2@gmail.com')
             ->subject('Test subject')
             ->content('content');
-
-        // Simulate the error from PHPMailer
-        $message->getMessage()->Mailer = 'mail';
 
         $eventsManager = new EventsManager();
 
