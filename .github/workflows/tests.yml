@@ -7,7 +7,6 @@ jobs:
     name: PHP ${{ matrix.php-versions }}
 
     runs-on: ubuntu-latest
-    container: ubuntu
 
     services:
       mailpit:
