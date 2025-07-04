@@ -194,12 +194,16 @@ class SmtpTest extends TestCase
     {
         $eventsCount = 0;
 
-        $mailer  = new Manager(array_merge($this->config, ['driver' => 'sendmail']));
+        $mailer  = new Manager($this->config);
         $message = $mailer->createMessage()
             ->to('example_to@gmail.com')
             ->to('example_to2@gmail.com')
             ->subject('Test subject')
             ->content('content');
+        
+        // Force PHPMailer to use an invalid sendmail path that will fail
+        $message->getMessage()->Mailer = 'sendmail';
+        $message->getMessage()->Sendmail = '/nonexistent/sendmail';
 
         $eventsManager = new EventsManager();
 
