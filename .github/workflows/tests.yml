@@ -67,6 +67,7 @@ jobs:
       - name: Setup Tests
         run: |
           cp .env.default .env
+          sed -i "s/DATA_MAILPIT_HOST_URI='mailpit'/DATA_MAILPIT_HOST_URI='localhost'/" .env
 
       - name: Install Mailpit and create a symbolic link to sendmail command
         run: |
